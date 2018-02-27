@@ -7,7 +7,7 @@ export async function callApi(path, params){
       body: params,
       method: 'POST',
       headers:{
-        Cookie:'_AT=77f8b677bce1ff8f5ac24ad27100e58a720a763677a03d06b64a4acd6672a882a07080af0c482eaa28072b926b17b493'
+        Cookie:'_AT=77f8b677bce1ff8f5ac24ad27100e58a1282d82e922e3ef6603171d01612ab1fd393d2fc159f8a1512ea46ef4ddaee73'
       }
     } 
   );
@@ -77,13 +77,6 @@ export async function queryFakeList(params) {
 
 export async function fakeAccountLogin(params) {
   return request('/api/login/account', {
-    method: 'POST',
-    body: params,
-  });
-}
-
-export async function fakeMobileLogin(params) {
-  return request('/api/login/mobile', {
     method: 'POST',
     body: params,
   });

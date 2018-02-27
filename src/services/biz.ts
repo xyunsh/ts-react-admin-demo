@@ -1,17 +1,17 @@
 import { callApi } from './api';
 
 export const brandApi = {
-    query : async function ( params: object ){
+    query : async function ( params: object ) {
         return callApi('biz/brand/query', params);
     },
 
-    modify: async function( params: object ){
+    modify: async function( params: object ) {
         return callApi('biz/brand/modify', params);
     }
 };
 
 export const enterpriseApi = {
-    query: async function( params: object ){
+    query: async function( params: object ) {
         return callApi('biz/enterprise/query', params);
     }
 };

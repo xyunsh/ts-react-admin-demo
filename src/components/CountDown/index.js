@@ -21,9 +21,12 @@ class CountDown extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.target !== nextProps.target) {
+      clearTimeout(this.timer);
       const { lastTime } = this.initTime(nextProps);
       this.setState({
         lastTime,
+      }, () => {
+        this.tick();
       });
     }
   }
@@ -76,24 +79,24 @@ class CountDown extends Component {
         clearTimeout(this.timer);
         this.setState({
           lastTime: 0,
+        }, () => {
+          if (onEnd) {
+            onEnd();
+          }
         });
-
-        if (onEnd) {
-          onEnd();
-        }
       } else {
         lastTime -= this.interval;
         this.setState({
           lastTime,
+        }, () => {
+          this.tick();
         });
-
-        this.tick();
       }
     }, this.interval);
   }
 
   render() {
-    const { format = this.defaultFormat, ...rest } = this.props;
+    const { format = this.defaultFormat, onEnd, ...rest } = this.props;
     const { lastTime } = this.state;
 
     const result = format(lastTime);
