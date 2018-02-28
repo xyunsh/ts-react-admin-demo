@@ -27,9 +27,9 @@ const submitFormLayout = {
     },
 };
 
-@connect((state, { model, id }) => ({ values: state[model].byId[id], submitting: state[model].submitting }))
+@connect((state, { model, id }) => ({ values: state[model].byId[id], submitting: state.loading.effects[`${model}/submit`]}))
 @AntForm.create()
-export default class Form extends React.PureComponent {
+export default class Form extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -68,6 +68,8 @@ export default class Form extends React.PureComponent {
         if(values){
             options.initialValue = values[name];
         }
+
+        console.log(options);
 
         if (child) {
             if (child.type === Switch) {

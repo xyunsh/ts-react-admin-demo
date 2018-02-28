@@ -5,7 +5,7 @@ import { isArray } from 'lodash';
 
 import styles from './index.less';
 
-@connect((state, {model})=>({...state[model]}))
+@connect((state, {model})=>({...state[model],loading:state.loading.effects[`${model}/queryPages`]}))
 export default class StandardTable extends React.PureComponent {
   state = {
     selectedRowKeys: [],

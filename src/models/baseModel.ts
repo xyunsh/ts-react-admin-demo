@@ -14,27 +14,20 @@ export const effects = ({query, modify}) =>  ({
         if (sorter.field) {
             params.order = `${sorter.field} ${sorter.order === 'ascend' ? 'asc' : 'desc'}`;
         }
-    
-        yield put({ type: 'changeLoading', payload: { loading: true }, });
-  
+      
         const {__code, __data:{ data = [], total}} = yield call(query, params);
         
         yield put({ type: 'savePages', payload: { data, pagination: { total, pageSize }, filters }, });
         
-        yield put({ type: 'changeLoading', payload: { loading: false }, });
     }
 
     *submit({ payload }, { call, put }) {
         const { values, callback } = payload;
-          
-        yield put({ type: 'changeSubmitting', payload: { submitting: true }, });
-  
+            
         const {__code, } = yield call(modify, values);
         
         yield put({ type: 'saveEntity', payload: values });
         
-        yield put({ type: 'changeSubmitting', payload: { submitting: false }, });
-
         if(callback){
             callback();
         }
@@ -56,13 +49,6 @@ export const reducers = {
         return { ...state, ...payload, byId, allIds, };
     }
 
-    changeLoading( state, { payload } ) {
-        return {
-        ...state,
-        ...payload
-        };
-    }
-
     saveEntity(state, { payload: { id, ...values } }){
         return {
             ...state,
@@ -74,13 +60,6 @@ export const reducers = {
                 }
             }
         }
-    }
-
-    changeSubmitting(state, { payload }) {
-        return {
-        ...state,
-        ...payload
-        };
     }
 };
 

@@ -55,7 +55,8 @@ export default function request(url, options) {
         'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8',
         ...newOptions.headers,
       };
-      newOptions.body = JSON.stringify(newOptions.body);
+      //newOptions.body = JSON.stringify(newOptions.body);
+      newOptions.body = 'body='+JSON.stringify(newOptions.body);
     } else {
       // newOptions.body is FormData
       newOptions.headers = {
