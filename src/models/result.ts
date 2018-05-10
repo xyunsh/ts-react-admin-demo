@@ -18,4 +18,6 @@ export const resultOK = ( data: object ) => {
     return result( RespCode.OK, data );
 };
 
-export const isResultOK = ( {__code} ) => __code === RespCode.OK; 
+export const isResultOK = ( {__code }: { __code: RespCode} ) => __code === RespCode.OK; 
+
+export const resultData = ( ret: Result ) => ret && ret.__data;
