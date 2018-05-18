@@ -15,16 +15,16 @@ export const effects = ({query, modify}) =>  ({
             params.order = `${sorter.field} ${sorter.order === 'ascend' ? 'asc' : 'desc'}`;
         }
       
-        const {__code, __data:{ data = [], total}} = yield call(query, params);
+        const {code, data:{ entitis = [], total}} = yield call(query, params);
         
-        yield put({ type: 'savePages', payload: { data, pagination: { total, pageSize }, filters }, });
+        yield put({ type: 'savePages', payload: { entitis, pagination: { total, pageSize }, filters }, });
         
     }
 
     *submit({ payload }, { call, put }) {
         const { values, callback } = payload;
             
-        const {__code, } = yield call(modify, values);
+        const {code, } = yield call(modify, values);
         
         yield put({ type: 'saveEntity', payload: values });
         
@@ -35,13 +35,13 @@ export const effects = ({query, modify}) =>  ({
 });
 
 export const reducers = {
-    savePages( state,  { payload: { data, ...payload } } ) { 
+    savePages( state,  { payload: { entitis, ...payload } } ) { 
         
         const byId = {};
 
         const allIds = [];
 
-        data.map(o => {
+        entitis.map(o => {
             byId[o.id] = o;
             allIds.push(o.id);
         });

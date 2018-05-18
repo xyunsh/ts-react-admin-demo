@@ -16,7 +16,15 @@
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@layouts/*": ["layouts/*"],
+      "@models/*": ["models/*"],
+      "@services/*": ["services/*"],
+      "@utils/*": ["utils/*"]
+    }
   },
   "exclude": [
     "node_modules",

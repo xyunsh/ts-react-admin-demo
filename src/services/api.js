@@ -2,13 +2,10 @@ import { stringify } from 'qs';
 import request from '../utils/request';
 
 export async function callApi(path, params){
-  const url = `http://localhost:9001/api/${path}`;
+  const url = `http://localhost:3000/${path}`;
   return request(url, { 
       body: params,
-      method: 'POST',
-      headers:{
-        Cookie:'_AT=77f8b677bce1ff8f5ac24ad27100e58a1282d82e922e3ef6603171d01612ab1fd393d2fc159f8a1512ea46ef4ddaee73'
-      }
+      method: 'POST'
     } 
   );
 }

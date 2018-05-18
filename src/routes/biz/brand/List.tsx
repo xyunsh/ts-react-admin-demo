@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { Menu, Card, Badge, Divider, Button, Dropdown, Icon, Input, Row, Col } from 'antd';
-import moment from 'moment';
 
-import StandardTable from '../../../components/Table/index';
+import StandardTable from '@components/Table/index';
 import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
 
 import { DatetimeColumn, Column } from '../../../components/Table/Columns';
