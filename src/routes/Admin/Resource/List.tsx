@@ -1,61 +1,72 @@
-import React, { PureComponent } from 'react';
-import { Row, Col, Card, Form, Input, Select, Icon, Button, Dropdown, Menu, InputNumber, DatePicker, Modal, message, Badge, Divider } from 'antd';
-import moment from 'moment';
+import * as React from 'react';
+import { Menu, Card, Badge, Divider, Button, Dropdown, Icon, Input, Row, Col } from 'antd';
 
-import StandardTable from '@components/Table';
-import PageHeaderLayout from '@layouts/PageHeaderLayout';
+import StandardTable from '@components/Table/index';
+import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
 
-export default class List extends PureComponent {
+import { DatetimeColumn, Column } from '@components/Table/Columns';
+import PopModalButton from '@components/Table/PopModalButton';
+import Modify from './Modify';
+
+const { Search } = Input;
+
+export default class List extends React.PureComponent {
   
   render() {
     const menu = (
-      <Menu onClick={this.handleMenuClick} selectedKeys={[]}>
-        <Menu.Item key="remove">删除</Menu.Item>
-        <Menu.Item key="approval">批量审批</Menu.Item>
+      <Menu>
+        <Menu.Item key="remove">批量删除</Menu.Item>
+        <Menu.Item key="approval">批量通过</Menu.Item>
       </Menu>
     );
 
-    const status = ['关闭', '运行中', '已上线', '异常'];
-    const statusMap = ['default', 'processing', 'success', 'error'];
-    
-    const columns = [
-    {
-        title: 'ID',
-        dataIndex: 'id',
-    },
-    {
-        title: '名称',
-        dataIndex: 'name',
-    },
-    {
-        title: '别名',
-        dataIndex: 'slug',
-    },
-    {
-        title: '更新时间',
-        dataIndex: 'create_time',
-        sorter: true,
-        render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
-    },
-    {
-        title: '操作',
-        render: () => (
-        <div>
-            <a href="">配置</a>
-            <Divider type="vertical" />
-            <a href="">订阅警报</a>
-        </div>
-        ),
-    },
-    ];
-
     return (
-      <PageHeaderLayout title="查询表格">
+      <PageHeaderLayout title="资源">
         <Card bordered={false}>
             <StandardTable
-                columns={columns}
-                model="admin/resource"
-            />
+              model='admin/resource'
+              header={({selectedRowKeys, onSearch})=>(
+                <Row>
+                  <Col span={18}>
+                    <PopModalButton icon="plus" type="primary" componentAssigned={Modify}>新建</PopModalButton>
+                    {
+                      selectedRowKeys && selectedRowKeys.length > 0 && (
+                        <span>
+                          <Button>批量删除</Button>
+                          <Dropdown overlay={menu}>
+                            <Button>
+                              更多操作 <Icon type="down" />
+                            </Button>
+                          </Dropdown>
+                        </span>
+                      )
+                    }
+                  </Col>
+                  <Col span={6}>
+                    <Search onSearch={(val)=>onSearch({query:val})} placeholder="请输入查询关键字"/>
+                  </Col>
+                </Row>
+              )}
+            >
+              <Column title="ID" dataIndex="id"/>
+              <Column title='名称' dataIndex='name' width={160}/>
+              <Column title='简称' dataIndex='slug'/>
+              <DatetimeColumn title="更新时间" dataIndex="create_time"/>
+              <Column title="操作" render={(val,{id}) => (
+                <div>
+                      <PopModalButton componentAssigned={(props) => <Modify id={id} {...props}/>}>编辑</PopModalButton>
+                      <Divider type="vertical" />
+                      <Dropdown overlay={<Menu>
+                        <Menu.Item key="remove">删除</Menu.Item>
+                        <Menu.Item key="approval">通过</Menu.Item>
+                      </Menu>}>
+                        <a>
+                          更多<Icon type="down" />
+                        </a>
+                      </Dropdown>
+                </div>
+              )}/>
+            </StandardTable>
         </Card>
       </PageHeaderLayout>
     );

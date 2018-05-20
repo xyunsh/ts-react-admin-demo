@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Input, Rate } from 'antd';
 
-import Form from '../../../components/Form/Form';
+import { Form } from '@components/Form/Form';
 
 export default class Modify extends React.Component {
 

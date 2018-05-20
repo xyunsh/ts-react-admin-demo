@@ -29,7 +29,7 @@ const submitFormLayout = {
 
 @connect((state, { model, id }) => ({ values: state[model].byId[id], submitting: state.loading.effects[`${model}/submit`]}))
 @AntForm.create()
-export default class Form extends React.Component {
+export class Form extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
