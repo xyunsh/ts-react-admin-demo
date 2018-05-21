@@ -1,11 +1,9 @@
-import {
-    createElement
-} from 'react';
+import { createElement } from 'react';
 import dynamic from 'dva/dynamic';
 import pathToRegexp from 'path-to-regexp';
-import {
-    getMenuData
-} from './menu';
+import { getMenuData } from './menu';
+
+import { ADMIN_MENU, ADMIN_PRIVILEGE, ADMIN_ROLE, ADMIN_RESOURCE } from '@models/admin';
 
 let routerDataCache;
 
@@ -209,22 +207,21 @@ export const getRouterData = app => {
         // '/user/:id': {
         //   component: dynamicWrapper(app, [], () => import('../routes/User/SomeComponent')),
         // },
-
-        '/biz/brands': {
-            component: dynamicWrapper(app, ['biz/brand'], () =>
-                import ('../routes/biz/brand/List')),
-        },
-        '/biz/enterprises': {
-            component: dynamicWrapper(app, ['biz/enterprise'], () =>
-                import ('../routes/biz/enterprise/List')),
-        },
-        '/biz/stores': {
-            component: dynamicWrapper(app, ['biz/store'], () =>
-                import ('../routes/biz/store/List')),
+        '/admin/settings' : {
+            component: dynamicWrapper(app, [ ADMIN_PRIVILEGE, ADMIN_RESOURCE, ADMIN_ROLE], () => import('../routes/Admin/Settings'))
         },
 
-        '/admin/resources': {
-            component: dynamicWrapper(app, ['admin/resource'], () => import('../routes/Admin/Resource/List'))
+        '/admin/settings/resources': {
+            component: dynamicWrapper(app, [ADMIN_RESOURCE], () => import('../routes/Admin/Resource/List'))
+        },
+        '/admin/settings/roles': {
+            component: dynamicWrapper(app, [ADMIN_ROLE], () => import('../routes/Admin/Role/List'))
+        },
+        '/admin/settings/privileges': {
+            component: dynamicWrapper(app, [ADMIN_PRIVILEGE], () => import('../routes/Admin/Privilege/List'))
+        },
+        '/admin/menus': {
+            component: dynamicWrapper(app, [ADMIN_MENU], () => import('../routes/Admin/Menu/List'))
         }
     };
     // Get name from ./menu.js or just set it in the router data.

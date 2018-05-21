@@ -91,11 +91,8 @@ export default function request(url, options) {
             if (newOptions.method === 'DELETE' || response.status === 204) {
                 return response.text();
             }
-            const result = response.json();
 
-            console.log(result);
-
-            return result;
+            return response.json();
         })
         .catch((e) => {
             const { dispatch } = store;
@@ -103,7 +100,7 @@ export default function request(url, options) {
             const {name: status} = e;
 
             if (status === 401) {
-                dispatch({ type: 'login/logout', });
+                dispatch({ type: 'login/logout' });
                 return;
             }
             else if (status === 403) {

@@ -40,10 +40,11 @@ export class Form extends React.Component {
             if (!err) {
                 dispatch({
                     type: `${model}/submit`, payload: {
-                        values: {
+                        values: values && values[keyProp] ? {
                             ...newValues,
                             [keyProp]: values[keyProp]
-                        },
+                        } : newValues,
+
                         callback: hideModal
                     }
                 });
@@ -69,7 +70,7 @@ export class Form extends React.Component {
             options.initialValue = values[name];
         }
 
-        console.log(options);
+        //console.log(options);
 
         if (child) {
             if (child.type === Switch) {

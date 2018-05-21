@@ -1,4 +1,4 @@
-import { isResultOK } from './result';
+import { isResultOK } from '@utils/result';
 
 export const effects = ({query, modify}) =>  ({
     *queryPages( { payload }, { call, put, } ) {
@@ -15,7 +15,7 @@ export const effects = ({query, modify}) =>  ({
             params.order = `${sorter.field} ${sorter.order === 'ascend' ? 'asc' : 'desc'}`;
         }
       
-        const {code, data:{ entitis = [], total}} = yield call(query, params);
+        const { code, data:{ entitis = [], total} } = yield call(query, params);
         
         yield put({ type: 'savePages', payload: { entitis, pagination: { total, pageSize }, filters }, });
         
@@ -24,9 +24,9 @@ export const effects = ({query, modify}) =>  ({
     *submit({ payload }, { call, put }) {
         const { values, callback } = payload;
             
-        const {code, } = yield call(modify, values);
+        const { code, data } = yield call(modify, values);
         
-        yield put({ type: 'saveEntity', payload: values });
+        yield put({ type: 'saveEntity', payload: { ...values, ...data} });
         
         if(callback){
             callback();
@@ -37,9 +37,7 @@ export const effects = ({query, modify}) =>  ({
 export const reducers = {
     savePages( state,  { payload: { entitis, ...payload } } ) { 
         
-        const byId = {};
-
-        const allIds = [];
+        const byId = {}, allIds = [];
 
         entitis.map(o => {
             byId[o.id] = o;
@@ -49,16 +47,18 @@ export const reducers = {
         return { ...state, ...payload, byId, allIds, };
     }
 
-    saveEntity(state, { payload: { id, ...values } }){
+    saveEntity({ byId, allIds, ...state}, { payload: { id, ...values } }){
         return {
             ...state,
             byId:{
-                ...state.byId,
+                ...byId,
                 [id]:{
-                    ...state.byId[id],
+                    ...byId[id],
                     ...values
+                    id,
                 }
-            }
+            },
+            allIds: allIds.indexOf(id) >= 0 ? allIds: [ id, ...allIds ]
         }
     }
 };

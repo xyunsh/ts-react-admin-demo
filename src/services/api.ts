@@ -1,7 +1,6 @@
-import { stringify } from 'qs';
 import request from '../utils/request';
 
-export async function callApi(path, params){
+export async function callApi(path: string, params: object){
 	const url = `http://localhost:3000/${path}`;
 	return request(url, { 
 			body: params,
@@ -9,6 +8,18 @@ export async function callApi(path, params){
 		} 
 	);
 }
+
+export const baseApi = (resource: string) => ({
+	query : async function ( params: object ) {
+		return callApi(`admin/${resource}/query`, params);
+	},
+
+	modify: async function( params: object ) {
+		return callApi(`admin/${resource}/modify`, params);
+	}
+});
+
+
 
 export async function queryProjectNotice() {
 	return request('/api/project/notice');
@@ -19,7 +30,7 @@ export async function queryActivities() {
 }
 
 export async function queryRule(params) {
-	return request(`/api/rule?${stringify(params)}`);
+	return request(`/api/rule?${JSON.stringify(params)}`);
 }
 
 export async function removeRule(params) {
@@ -66,7 +77,7 @@ export async function queryAdvancedProfile() {
 }
 
 export async function queryFakeList(params) {
-	return request(`/api/fake_list?${stringify(params)}`);
+	return request(`/api/fake_list?${JSON.stringify(params)}`);
 }
 
 export async function fakeAccountLogin(params) {

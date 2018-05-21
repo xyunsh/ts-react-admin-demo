@@ -2,7 +2,7 @@ import { routerRedux } from 'dva/router';
 import { accountLogin } from '../services/auth';
 import { setAuthority } from '../utils/authority';
 import { reloadAuthorized } from '../utils/Authorized';
-import { isResultOK, resultData } from './result';
+import { isResultOK, resultData } from '@utils/result';
 
 export default {
   namespace: 'login',

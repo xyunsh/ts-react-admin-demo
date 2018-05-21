@@ -1,11 +1,18 @@
-import { callApi } from './api';
+import { callApi, baseApi } from './api';
 
 export const resourceApi = {
-    query : async function ( params: object ) {
-        return callApi('admin/resource/query', params);
-    },
-
-    modify: async function( params: object ) {
-        return callApi('admin/resource/modify', params);
-    }
+    ...baseApi('resource')
 };
+
+export const menuApi = {
+    ...baseApi('menu')
+};
+
+export const privilegeApi = {
+    ...baseApi('privilege')
+};
+
+export const roleApi = {
+    ...baseApi('role')
+};
+

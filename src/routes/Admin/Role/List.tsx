@@ -1,11 +1,13 @@
-import * as React from 'react';
+import React, { Fragment, PureComponent } from 'react';
 import { Menu, Card, Badge, Divider, Button, Dropdown, Icon, Input, Row, Col } from 'antd';
 
 import StandardTable from '@components/Table/index';
-import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
+import PageHeaderLayout from '@layouts/PageHeaderLayout';
 
-import { DatetimeColumn, Column } from '../../../components/Table/Columns';
-import PopModalButton from '../../../components/Table/PopModalButton';
+import { DatetimeColumn, Column } from '@components/Table/Columns';
+import PopModalButton from '@components/Table/PopModalButton';
+import { ADMIN_ROLE } from '@models/admin';
+
 import Modify from './Modify';
 
 const { Search } = Input;
@@ -21,10 +23,10 @@ export default class List extends React.PureComponent {
     );
 
     return (
-      <PageHeaderLayout title="品牌">
+      <Fragment>
         <Card bordered={false}>
             <StandardTable
-              model='biz/brand'
+              model={ADMIN_ROLE}
               header={({selectedRowKeys, onSearch})=>(
                 <Row>
                   <Col span={18}>
@@ -49,10 +51,9 @@ export default class List extends React.PureComponent {
               )}
             >
               <Column title="ID" dataIndex="id"/>
-              <Column title='英文名' dataIndex='en_name' width={160}/>
-              <Column title='简称' dataIndex='short_name'/>
-              <Column title="名称" dataIndex="name"/>
-              <DatetimeColumn title="更新时间" dataIndex="create_time"/>
+              <Column title='名称' dataIndex='name' width={160}/>
+              <Column title='简称' dataIndex='slug'/>
+              <DatetimeColumn title="更新时间" dataIndex="updated_at"/>
               <Column title="操作" render={(val,{id}) => (
                 <div>
                       <PopModalButton componentAssigned={(props) => <Modify id={id} {...props}/>}>编辑</PopModalButton>
@@ -69,7 +70,7 @@ export default class List extends React.PureComponent {
               )}/>
             </StandardTable>
         </Card>
-      </PageHeaderLayout>
+      </Fragment>
     );
   }
 }

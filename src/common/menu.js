@@ -116,34 +116,16 @@ const menuData = [{
         path: 'register-result',
     }],
 }, {
-    name: '商家',
-    icon: 'warning',
-    path: 'biz',
-    authority: 'admin',
-    children: [{
-        name: '品牌',
-        path: 'brands',
-    }, {
-        name: '企业',
-        path: 'enterprises',
-    }, {
-        name: '商家',
-        path: 'stores',
-    }],
-}, {
     name: '系统',
     icon: 'warning',
     path: 'admin',
     authority: 'admin',
     children: [{
-        name: '资源',
-        path: 'resources',
+        name: '设置',
+        path: 'settings',
     }, {
-        name: '权限',
-        path: 'privileges',
-    }, {
-        name: '角色',
-        path: 'roles',
+        name: '菜单',
+        path: 'menus',
     }],
 }];
 
