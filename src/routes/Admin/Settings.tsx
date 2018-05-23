@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { routerRedux, Route, Switch } from 'dva/router';
 import { connect } from 'dva';
+
 import PageHeaderLayout from '@layouts/PageHeaderLayout';
 import { getRoutes } from '@utils/utils';
 
@@ -13,7 +14,7 @@ export default class Settings extends Component {
         dispatch(routerRedux.push(`${match.url}/roles`));
         break;
       case 'resources':
-        dispatch(routerRedux.push(`${match.url}/resouces`));
+        dispatch(routerRedux.push(`${match.url}/resources`));
         break;
       case 'privileges':
         dispatch(routerRedux.push(`${match.url}/privileges`));

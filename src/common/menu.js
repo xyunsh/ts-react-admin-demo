@@ -122,7 +122,7 @@ const menuData = [{
     authority: 'admin',
     children: [{
         name: '设置',
-        path: 'settings',
+        path: 'settings/roles',
     }, {
         name: '菜单',
         path: 'menus',

@@ -1,18 +1,14 @@
 import React, { Fragment, PureComponent } from 'react';
 import { Menu, Card, Badge, Divider, Button, Dropdown, Icon, Input, Row, Col } from 'antd';
 
-import StandardTable from '@components/Table/index';
-import PageHeaderLayout from '@layouts/PageHeaderLayout';
-
-import { DatetimeColumn, Column } from '@components/Table/Columns';
-import PopModalButton from '@components/Table/PopModalButton';
+import { Table, DatetimeColumn, Column, PopModalButton } from '@components/Table';
 import { ADMIN_PRIVILEGE } from '@models/admin';
 
 import Modify from './Modify';
 
 const { Search } = Input;
 
-export default class List extends React.PureComponent {
+export default class List extends PureComponent {
   
   render() {
     const menu = (
@@ -25,7 +21,7 @@ export default class List extends React.PureComponent {
     return (
       <Fragment>
         <Card bordered={false}>
-            <StandardTable
+            <Table
               model={ADMIN_PRIVILEGE}
               header={({selectedRowKeys, onSearch})=>(
                 <Row>
@@ -68,7 +64,7 @@ export default class List extends React.PureComponent {
                       </Dropdown>
                 </div>
               )}/>
-            </StandardTable>
+            </Table>
         </Card>
       </Fragment>
     );

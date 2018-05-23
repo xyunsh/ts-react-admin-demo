@@ -1,11 +1,9 @@
 import * as React from 'react';
 import { Menu, Card, Badge, Divider, Button, Dropdown, Icon, Input, Row, Col } from 'antd';
 
-import StandardTable from '@components/Table/index';
 import PageHeaderLayout from '@layouts/PageHeaderLayout';
 
-import { DatetimeColumn, Column } from '@components/Table/Columns';
-import PopModalButton from '@components/Table/PopModalButton';
+import { Table, DatetimeColumn, Column, PopModalButton } from '@components/Table';
 import { ADMIN_MENU } from '@models/admin';
 
 import Modify from './Modify';
@@ -25,7 +23,7 @@ export default class List extends React.PureComponent {
     return (
       <PageHeaderLayout title="菜单">
         <Card bordered={false}>
-            <StandardTable
+            <Table
               model={ADMIN_MENU}
               header={({selectedRowKeys, onSearch})=>(
                 <Row>
@@ -68,7 +66,7 @@ export default class List extends React.PureComponent {
                       </Dropdown>
                 </div>
               )}/>
-            </StandardTable>
+            </Table>
         </Card>
       </PageHeaderLayout>
     );

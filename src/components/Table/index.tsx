@@ -1,3 +1,9 @@
 import Table from './Table';
+import PopModalButton from './PopModalButton';
 
-export default Table;
+export * from './Columns';
+
+export { 
+    Table,
+    PopModalButton
+};

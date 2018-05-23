@@ -16,6 +16,10 @@ export const baseApi = (resource: string) => ({
 
 	modify: async function( params: object ) {
 		return callApi(`admin/${resource}/modify`, params);
+	},
+
+	details: async function( id: number ){
+		return callApi(`admin/${resource}/details`, {id});
 	}
 });
 

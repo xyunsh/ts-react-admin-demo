@@ -16,3 +16,6 @@ export const roleApi = {
     ...baseApi('role')
 };
 
+export const userApi = {
+    ...baseApi('user')
+}
