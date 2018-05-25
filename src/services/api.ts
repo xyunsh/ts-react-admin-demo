@@ -1,6 +1,12 @@
-import request from '../utils/request';
+import { isObject } from 'lodash';
+import request from '@utils/request';
 
-export async function callApi(path: string, params: object){
+export async function callApi(path: string | object, params: object){
+	if(isObject(path)){
+		params = path.params;
+		path = path.dataApi;
+	}
+
 	const url = `http://localhost:3000/${path}`;
 	return request(url, { 
 			body: params,

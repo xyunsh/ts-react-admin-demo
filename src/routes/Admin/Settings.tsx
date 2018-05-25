@@ -3,7 +3,7 @@ import { routerRedux, Route, Switch } from 'dva/router';
 import { connect } from 'dva';
 
 import PageHeaderLayout from '@layouts/PageHeaderLayout';
-import { getRoutes } from '@utils/utils';
+import { getRoutes } from '@utils';
 
 @connect()
 export default class Settings extends Component {

@@ -7,14 +7,14 @@ export enum RespCode {
 
 export class Result {
     constructor(
-        private readonly code: RespCode, 
-        private readonly message: string | null, 
-        private readonly data: any    ){
+        readonly code: RespCode, 
+        readonly message?: string, 
+        readonly data?: any    ){
 
     }
 }
 
-export const result = ( code: RespCode, message: string | null, data: any ) => {
+export const result = ( code: RespCode, message?: string, data?: any ) => {
     return new Result( code, message, data );
 }
 

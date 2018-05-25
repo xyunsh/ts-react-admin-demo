@@ -14,11 +14,14 @@ export const effects = ({query, modify}) =>  ({
         if (sorter.field) {
             params.order = `${sorter.field} ${sorter.order === 'ascend' ? 'asc' : 'desc'}`;
         }
+
+        const result = yield call(query, params);
       
-        const { code, data:{ entitis = [], total} } = yield call(query, params);
-        
-        yield put({ type: 'savePages', payload: { entitis, pagination: { total, pageSize }, filters }, });
-        
+        if( isResultOK(result) ){
+            const { data:{ entities = [], total} } = result;
+            
+            yield put({ type: 'savePages', payload: { entities, pagination: { total, pageSize }, filters }, });
+        }        
     }
 
     *submit({ payload }, { call, put }) {
@@ -35,11 +38,11 @@ export const effects = ({query, modify}) =>  ({
 });
 
 export const reducers = {
-    savePages( state,  { payload: { entitis, ...payload } } ) { 
+    savePages( state,  { payload: { entities, ...payload } } ) { 
         
         const byId = {}, allIds = [];
 
-        entitis.map(o => {
+        entities.map(o => {
             byId[o.id] = o;
             allIds.push(o.id);
         });

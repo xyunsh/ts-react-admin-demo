@@ -23,7 +23,8 @@
       "@layouts/*": ["layouts/*"],
       "@models/*": ["models/*"],
       "@services/*": ["services/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@utils":["utils"]
     }
   },
   "exclude": [
