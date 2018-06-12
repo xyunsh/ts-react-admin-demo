@@ -5,7 +5,15 @@ export const resourceApi = {
 };
 
 export const menuApi = {
-    ...baseApi('menu')
+    ...baseApi('menu'),
+
+    loadAll: async function ( params: object ) {
+		return callApi(`admin/menu/loadTreeSource`, params);
+    },
+    
+    saveLevels: async function( params: object ){
+        return callApi(`admin/menu/saveLevels`, params);
+    }
 };
 
 export const privilegeApi = {

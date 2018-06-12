@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { Table, Alert } from 'antd';
+import { Table as AntTable, Alert } from 'antd';
 import { connect } from 'dva';
 import { isArray } from 'lodash';
 
 import styles from './index.less';
 
 @connect((state, { model }) => ({ ...state[model], loading: state.loading.effects[`${model}/queryPages`] }))
-export default class StandardTable extends React.PureComponent {
+export default class Table extends React.PureComponent {
     state = {
         selectedRowKeys: [],
     };
@@ -111,7 +111,7 @@ export default class StandardTable extends React.PureComponent {
                         showIcon
                     />
                 </div>
-                <Table
+                <AntTable
                     loading={loading}
                     rowKey={rowKey}
                     columns={columns}

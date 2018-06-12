@@ -221,7 +221,7 @@ export const getRouterData = app => {
             component: dynamicWrapper(app, [ADMIN_PRIVILEGE], () => import('../routes/Admin/Privilege/List'))
         },
         '/admin/menus': {
-            component: dynamicWrapper(app, [ADMIN_MENU], () => import('../routes/Admin/Menu/List'))
+            component: dynamicWrapper(app, [ADMIN_MENU], () => import('../routes/Admin/Menu/Index'))
         }
     };
     // Get name from ./menu.js or just set it in the router data.
